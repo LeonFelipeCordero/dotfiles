@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+./manual_deps.sh
+
 if command -v chezmoi >/dev/null; then
   chezmoi init --apply --source $PWD
   exit 0
