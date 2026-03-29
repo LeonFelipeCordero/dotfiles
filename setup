@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+curl https://mise.run | sh
+
 ./manual_deps.sh
 
 if command -v chezmoi >/dev/null; then

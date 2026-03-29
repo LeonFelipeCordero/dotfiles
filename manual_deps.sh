@@ -10,8 +10,6 @@ setup_docker() {
   sudo systemctl enable containerd.service
 }
 
-curl -s "https://get.sdkman.io" | bash
-
 if [[ "$(uname)" == "Darwin" ]]; then
   if ! command -v brew >/dev/null 2>&1; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -56,3 +54,5 @@ else
   echo "Unsupported OS"
   exit 1
 fi
+
+curl -s "https://get.sdkman.io" | bash
