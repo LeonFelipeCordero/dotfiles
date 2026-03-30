@@ -18,12 +18,12 @@ if [[ "$(uname)" == "Darwin" ]]; then
     echo "manual_deps: No brew found, installing it"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
-  brew install git zsh xclip gh
+  brew install git zsh xclip
 
 elif [[ -f /etc/arch-release ]]; then
 
   echo "manual_deps: Found Arch linux System"
-  sudo pacman -Sy --noconfirm git zsh xclip docker github-cli
+  sudo pacman -Sy --noconfirm git zsh xclip docker
 
   setup_docker
 
@@ -33,7 +33,7 @@ elif [[ -f /etc/debian_version ]]; then
 
   echo "manual_deps: Found Debian/Ubuntu base system"
   sudo apt-get update
-  sudo apt-get install -y git zsh xclip gh
+  sudo apt-get install -y git zsh xclip
 
   if ! command -v docker >/dev/null; then
     echo "manual_deps: Installing docker..."
