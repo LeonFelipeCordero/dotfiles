@@ -35,18 +35,20 @@ elif [[ -f /etc/debian_version ]]; then
   sudo apt-get update
   sudo apt-get install -y git zsh xclip
 
-  if ! command -v docker >/dev/null; then
-    echo "manual_deps: Installing docker..."
-    curl -fsSL https://get.docker.com -o get-docker.sh
-    sudo sh ./get-docker.sh --dry-run
-    setup_docker
-  fi
+  # if ! command -v docker >/dev/null; then
+  #   echo "manual_deps: Installing docker..."
+  #   curl -fsSL https://get.docker.com -o get-docker.sh
+  #   sudo sh ./get-docker.sh
+  #   setup_docker
+  # fi
 
   curl -L -o devpod "https://github.com/loft-sh/devpod/releases/latest/download/devpod-linux-amd64" && sudo install -c -m 0755 devpod /usr/local/bin && rm -f devpod
 
 else
+
   echo "manual_deps: Unsupported OS"
   exit 1
+
 fi
 
 curl -s "https://get.sdkman.io" | bash
