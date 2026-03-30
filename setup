@@ -2,19 +2,25 @@
 
 set -euo pipefail
 
-curl https://mise.run | sh
+if ! command -v mise >/dev/null; then
+  echo "setup: Installing mise"
+  curl https://mise.run | sh
+fi
 
 ./manual_deps.sh
 
 if command -v chezmoi >/dev/null; then
+  echo "setup: Found chezmoi in the system"
   chezmoi init --apply --source $PWD
   exit 0
 fi
 
 if command -v mise >/dev/null; then
+  echo "setup: Found mise in the syste, installing chezmoi"
   mise exec chezmoi -- chezmoi init --apply --source $PWD
   exit 0
 fi
 
+echo "setup: running chezmoi from curl"
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply --source $PWD
 exit 0
