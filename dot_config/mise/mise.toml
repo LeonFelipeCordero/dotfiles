@@ -1,3 +1,5 @@
+min_version = "2025.11.7"
+
 [tools]
 bat = "0.26.1"
 btop = "latest"
@@ -18,3 +20,4 @@ starship = "1.24.2"
 experimental = true
 lockfile = true
 pin = true
+
