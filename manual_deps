@@ -54,6 +54,8 @@ fi
 curl -s "https://get.sdkman.io" | bash
 
 echo "manual_deps: setting up zsh as default shell"
-chsh -s $(which zsh)
+if command -v chsh >/dev/null 2>&1 && command -v zsh >/dev/null 2>&1; then
+  chsh -s "$(command -v zsh)" || true
+fi
 
 echo "manual_deps: finish to install dependencies"
