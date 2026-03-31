@@ -7,7 +7,7 @@ if ! command -v mise >/dev/null; then
   curl https://mise.run | sh
 fi
 
-./manual_deps.h
+./manual_deps
 
 if command -v chezmoi >/dev/null; then
   echo "setup: Found chezmoi in the system"
