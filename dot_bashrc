@@ -1,0 +1,26 @@
+set -o vi
+
+# edit PATH
+if [[ -d $HOME/.local/bin ]]; then
+  export PATH=$HOME/.local/bin:$PATH
+fi
+
+if command -v mise >/dev/null; then
+  eval "$(mise activate bash)"
+fi
+
+# (neo)vim
+if command -v nvim >/dev/null; then
+  export EDITOR="nvim"
+  export VISUAL="nvim"
+fi
+
+# enable the starship prompt
+if command -v starship >/dev/null; then
+  eval "$(starship init bash)"
+fi
+
+# use bat instead of cat
+if command -v bat >/dev/null; then
+  alias cat="bat"
+fi

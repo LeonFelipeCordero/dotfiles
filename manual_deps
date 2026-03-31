@@ -53,4 +53,7 @@ fi
 
 curl -s "https://get.sdkman.io" | bash
 
+echo "manual_deps: setting up zsh as default shell"
+chsh -s $(which zsh)
+
 echo "manual_deps: finish to install dependencies"
