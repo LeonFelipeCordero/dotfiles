@@ -25,7 +25,7 @@ elif [[ -f /etc/arch-release ]]; then
   echo "manual_deps: Found Arch linux System"
   sudo pacman -Sy --noconfirm git zsh xclip docker
 
-  setup_docker
+  # setup_docker
 
   curl -L -o devpod "https://github.com/loft-sh/devpod/releases/latest/download/devpod-linux-amd64" && sudo install -c -m 0755 devpod /usr/local/bin && rm -f devpod
 
