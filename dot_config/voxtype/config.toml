@@ -235,7 +235,6 @@ on_transcription = true
 #     - "material"  - Material Design Icons (requires MDI font)
 #     - "phosphor"  - Phosphor Icons (requires Phosphor font)
 #     - "codicons"  - VS Code icons (requires Codicons font)
-#     - "omarchy"   - Omarchy distro icons
 #   Universal (no special fonts needed):
 #     - "minimal"   - Simple Unicode (○ ● ◐ ×)
 #     - "dots"      - Geometric shapes (◯ ⬤ ◔ ◌)

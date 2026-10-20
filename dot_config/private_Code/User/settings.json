@@ -303,7 +303,6 @@
     "[jsonc]": {
         "editor.defaultFormatter": "vscode.json-language-features"
     },
-    "workbench.colorTheme": "GitHub Dark Dimmed",
     "[go]": {
         "editor.defaultFormatter": "golang.go"
     },
