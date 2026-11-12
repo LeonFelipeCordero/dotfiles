@@ -1,0 +1,17 @@
+# Never commit authentication or machine-local state.
+.env
+.env.*
+!.env.example
+.private
+*.pem
+*.key
+dot_ssh/
+private_dot_ssh/
+dot_config/gh/
+dot_config/private_gh/
+dot_aws/
+dot_kube/
+dot_codex/auth.json
+dot_npmrc
+dot_netrc
+__pycache__/

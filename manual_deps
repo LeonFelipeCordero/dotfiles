@@ -2,61 +2,26 @@
 
 set -euo pipefail
 
-setup_docker() {
-  echo "manual_deps: setting up docker user"
-  sudo groupadd docker
-  sudo usermod -aG docker $USER
-  newgrp docker
-  sudo systemctl enable docker.service
-  sudo systemctl enable containerd.service
-}
-
-if [[ "$(uname)" == "Darwin" ]]; then
-
-  echo "manual_deps: Found MacOS System"
-  if ! command -v brew >/dev/null 2>&1; then
-    echo "manual_deps: No brew found, installing it"
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if [[ -f /etc/debian_version ]]; then
+  sudo_cmd=()
+  if (( EUID != 0 )); then
+    sudo_cmd=(sudo -n)
   fi
-  brew install git zsh
-  brew install --cask android-platform-tools
 
+  "${sudo_cmd[@]}" apt-get update
+  "${sudo_cmd[@]}" env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    ca-certificates curl git zsh build-essential autoconf m4 pkg-config \
+    libncurses-dev libssl-dev unzip xz-utils
 elif [[ -f /etc/arch-release ]]; then
-
-  echo "manual_deps: Found Arch linux System"
-  sudo pacman -S --needed --noconfirm git zsh xclip docker android-tools android-udev
-
-  # setup_docker
-
-  curl -L -o devpod "https://github.com/loft-sh/devpod/releases/latest/download/devpod-linux-amd64" && sudo install -c -m 0755 devpod /usr/local/bin && rm -f devpod
-
-elif [[ -f /etc/debian_version ]]; then
-
-  echo "manual_deps: Found Debian/Ubuntu base system"
-  sudo apt-get update
-  sudo apt-get install -y git zsh xclip adb fastboot android-sdk-platform-tools-common
-
-  # if ! command -v docker >/dev/null; then
-  #   echo "manual_deps: Installing docker..."
-  #   curl -fsSL https://get.docker.com -o get-docker.sh
-  #   sudo sh ./get-docker.sh
-  #   setup_docker
-  # fi
-
-  curl -L -o devpod "https://github.com/loft-sh/devpod/releases/latest/download/devpod-linux-amd64" && sudo install -c -m 0755 devpod /usr/local/bin && rm -f devpod
-
+  sudo -n pacman -S --needed --noconfirm \
+    ca-certificates curl git zsh base-devel ncurses openssl unzip xz
+elif [[ "$(uname)" == Darwin ]]; then
+  command -v brew >/dev/null 2>&1 || {
+    echo "manual_deps: Install Homebrew before running setup" >&2
+    exit 1
+  }
+  brew install git zsh autoconf openssl ncurses
 else
-
-  echo "manual_deps: Unsupported OS"
+  echo "manual_deps: Unsupported OS" >&2
   exit 1
-
 fi
-
-curl -s "https://get.sdkman.io" | bash
-
-echo "manual_deps: setting up zsh as default shell"
-if command -v chsh >/dev/null 2>&1 && command -v zsh >/dev/null 2>&1; then
-  chsh -s "$(command -v zsh)" || true
-fi
-
-echo "manual_deps: finish to install dependencies"

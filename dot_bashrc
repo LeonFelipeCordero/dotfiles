@@ -1,26 +1,22 @@
+export PATH="$HOME/.local/bin:${MISE_DATA_DIR:-$HOME/.local/share/mise}/shims:$PATH"
+
+[[ $- == *i* ]] || return 0
+
 set -o vi
 
-# edit PATH
-if [[ -d $HOME/.local/bin ]]; then
-  export PATH=$HOME/.local/bin:$PATH
-fi
-
-if command -v mise >/dev/null; then
+if command -v mise >/dev/null 2>&1; then
   eval "$(mise activate bash)"
 fi
 
-# (neo)vim
-if command -v nvim >/dev/null; then
-  export EDITOR="nvim"
-  export VISUAL="nvim"
+if command -v nvim >/dev/null 2>&1; then
+  export EDITOR=nvim
+  export VISUAL=nvim
 fi
 
-# enable the starship prompt
-if command -v starship >/dev/null; then
+if command -v fzf >/dev/null 2>&1; then
+  eval "$(fzf --bash)"
+fi
+
+if command -v starship >/dev/null 2>&1; then
   eval "$(starship init bash)"
-fi
-
-# use bat instead of cat
-if command -v bat >/dev/null; then
-  alias cat="bat"
 fi

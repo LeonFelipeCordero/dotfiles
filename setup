@@ -4,31 +4,33 @@ set -euo pipefail
 
 cd -- "$(dirname -- "${BASH_SOURCE[0]}")"
 
-if ! command -v mise >/dev/null; then
-  echo "setup: Installing mise"
-  curl https://mise.run | sh
-fi
+umask 077
+backup_dir=""
+for target in .bashrc .zshrc .config/mise .config/nvim .oh-my-zsh; do
+  if [[ ! -e "$HOME/$target" && ! -L "$HOME/$target" ]]; then
+    continue
+  fi
+
+  if [[ -z "$backup_dir" ]]; then
+    mkdir -p "$HOME/.local/state/dotfiles/backups"
+    backup_dir="$(mktemp -d "$HOME/.local/state/dotfiles/backups/apply.XXXXXX")"
+    echo "setup: Backing up existing configuration to $backup_dir"
+  fi
+
+  mkdir -p "$backup_dir/$(dirname -- "$target")"
+  cp -aL -- "$HOME/$target" "$backup_dir/$target"
+done
 
 ./manual_deps
 
-if command -v chezmoi >/dev/null; then
-  echo "setup: Found chezmoi in the system"
-  chezmoi init --apply --source "$PWD"
-  exit 0
+export PATH="$HOME/.local/bin:$PATH"
+
+if ! command -v mise >/dev/null 2>&1; then
+  echo "setup: Installing mise"
+  installer="$(mktemp)"
+  trap 'rm -f "$installer"' EXIT
+  curl --fail --silent --show-error --location https://mise.run --output "$installer"
+  sh "$installer"
 fi
 
-if command -v mise >/dev/null; then
-  echo "setup: Found mise in the system, installing chezmoi"
-  mise exec chezmoi -- chezmoi init --apply --source "$PWD"
-  exit 0
-fi
-
-if command -v ~/.local/bin/mise >/dev/null; then
-  echo "setup: Found mise in path, installing chezmoi"
-  ~/.local/bin/mise exec chezmoi -- chezmoi init --apply --source "$PWD"
-  exit 0
-fi
-
-echo "setup: running chezmoi from curl"
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply --source "$PWD"
-exit 0
+mise exec chezmoi@2.74.1 -- chezmoi init --apply --source "$PWD"
