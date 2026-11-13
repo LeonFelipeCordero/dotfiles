@@ -1,4 +1,0 @@
-[".fonts"]
-type = "archive"
-url = "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Hack.zip"
-exclude = ["LICENSE", "README.md"]

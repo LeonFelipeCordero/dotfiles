@@ -1,32 +1,27 @@
 [tools]
-"bat" = "0.26.1"
-"btop" = "latest"
-"fzf" = "0.70.0"
-"github-cli" = "2.89.0"
-"github:peteonrails/voxtype" = "0.6.4"
-"lazydocker" = "0.25.0"
-"neovim" = "0.12.0"
-"starship" = "1.24.2"
-bun = "1.4.1"
-chezmoi = "2.70.0"
-elixir = "1.20.4"
-erlang = "29.0.6"
-go = "1.26.1"
-docker-cli = "29.4.3"
-node = "25.9.0"
-pi = "1.0.4"
-"npm:@playwright/cli" = "0.1.17"
-codex = "0.149.0"
-opencode = "1.18.21"
-"npm:ntn" = "0.23.19"
-"github:rtk-ai/rtk" = "0.49.0"
-uv = "0.12.17"
-"npm:playwright" = "1.63.0"
+bat = "0.26.1"
+btop = "1.4.8"
+fzf = "0.75.0"
+github-cli = "2.103.3"
+neovim = "0.12.6"
+starship = "1.27.0"
+bun = "1.4.4"
+chezmoi = "2.74.1"
+elixir = "1.20.5-otp-29"
+erlang = "29.1.2"
+go = "1.27.4"
+node = "26.13.1"
+pi = "1.5.2"
+"npm:@playwright/cli" = "0.1.24"
+"npm:@aikidosec/safe-chain" = "1.5.29"
+"github:rtk-ai/rtk" = "1.2.0"
+uv = "0.13.7"
+"npm:playwright" = "1.65.0"
+ripgrep = "15.2.0"
+fd = "10.5.2"
 
 [settings]
 experimental = true
-lockfile = true
-pin = true
 
 [settings.upgrade]
 auto_prune = false

@@ -1,5 +1,5 @@
 [".config/nvim"]
-    type = "archive"
-    url = "https://github.com/LazyVim/starter/archive/refs/heads/main.tar.gz"
-    stripComponents = 1
-    exclude = ["**/lazyvim.json", "**/options.lua"]
+type = "archive"
+url = "https://github.com/LazyVim/starter/archive/refs/heads/main.tar.gz"
+stripComponents = 1
+exclude = [".git*", "README.md", "LICENSE"]
