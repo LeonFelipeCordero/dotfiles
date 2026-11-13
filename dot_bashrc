@@ -44,11 +44,6 @@ if command -v chezmoi >/dev/null 2>&1; then
   alias ch=chezmoi
 fi
 
-if [[ -d "${ANDROID_HOME:-$HOME/Android/Sdk}" ]]; then
-  export ANDROID_HOME="${ANDROID_HOME:-$HOME/Android/Sdk}"
-  export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$PATH"
-fi
-
 if [[ -r "$HOME/.safe-chain/scripts/init-posix.sh" && -x "$(command -v safe-chain)" ]]; then
   source "$HOME/.safe-chain/scripts/init-posix.sh"
 fi

@@ -21,8 +21,6 @@ credentials or legacy language managers.
 
 Both shells include `cat` → `bat` (or Ubuntu’s `batcat`) and `ch` → `chezmoi`,
 persistent history, and fzf integration. Bash also loads system completion.
-Android SDK paths activate only when an SDK exists; an existing `ANDROID_HOME`
-takes priority. This setup does not download the Android SDK.
 
 Safe Chain installs through mise. Chezmoi downloads its matching versioned shell
 integration, so no `safe-chain setup` installer needs to modify the shell files.
