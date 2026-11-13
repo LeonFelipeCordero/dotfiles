@@ -3,6 +3,16 @@ export PATH="$HOME/.local/bin:${MISE_DATA_DIR:-$HOME/.local/share/mise}/shims:$P
 [[ $- == *i* ]] || return 0
 
 set -o vi
+shopt -s histappend checkwinsize
+HISTCONTROL=ignoreboth
+HISTSIZE=10000
+HISTFILESIZE=20000
+
+if [[ -r /usr/share/bash-completion/bash_completion ]]; then
+  source /usr/share/bash-completion/bash_completion
+elif [[ -r /etc/bash_completion ]]; then
+  source /etc/bash_completion
+fi
 
 if command -v mise >/dev/null 2>&1; then
   eval "$(mise activate bash)"
@@ -13,10 +23,32 @@ if command -v nvim >/dev/null 2>&1; then
   export VISUAL=nvim
 fi
 
-if command -v fzf >/dev/null 2>&1; then
-  eval "$(fzf --bash)"
+if command -v fzf >/dev/null 2>&1 && fzfInit="$(fzf --bash 2>/dev/null)"; then
+  eval "$fzfInit"
+elif [[ -r "$HOME/.fzf.bash" ]]; then
+  source "$HOME/.fzf.bash"
 fi
+unset fzfInit
 
 if command -v starship >/dev/null 2>&1; then
   eval "$(starship init bash)"
+fi
+
+if command -v bat >/dev/null 2>&1; then
+  alias cat=bat
+elif command -v batcat >/dev/null 2>&1; then
+  alias cat=batcat
+fi
+
+if command -v chezmoi >/dev/null 2>&1; then
+  alias ch=chezmoi
+fi
+
+if [[ -d "${ANDROID_HOME:-$HOME/Android/Sdk}" ]]; then
+  export ANDROID_HOME="${ANDROID_HOME:-$HOME/Android/Sdk}"
+  export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$PATH"
+fi
+
+if [[ -r "$HOME/.safe-chain/scripts/init-posix.sh" && -x "$(command -v safe-chain)" ]]; then
+  source "$HOME/.safe-chain/scripts/init-posix.sh"
 fi

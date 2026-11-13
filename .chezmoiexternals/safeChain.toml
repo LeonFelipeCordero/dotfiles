@@ -1,0 +1,3 @@
+[".safe-chain/scripts/init-posix.sh"]
+type = "file"
+url = "https://raw.githubusercontent.com/AikidoSec/safe-chain/1.5.29/packages/safe-chain/src/shell-integration/startup-scripts/init-posix.sh"

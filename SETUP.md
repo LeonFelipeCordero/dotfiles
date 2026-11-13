@@ -14,16 +14,25 @@ workspace mounts need a separate security review.
 Bash remains the default shell. Start `zsh` for Zsh, Oh My Zsh, completion,
 autosuggestions, syntax highlighting, fzf, and the Starship prompt. Setup does not
 change the login shell, Docker groups, or services. Before applying, setup backs up
-existing shell, mise, Neovim, and Oh My Zsh files under
+existing shell, mise, Neovim, Oh My Zsh, and Safe Chain integration files under
 `~/.local/state/dotfiles/backups/` with owner-only access. It does not set a Git
 identity. Neither shell loads host
 credentials or legacy language managers.
 
-Tools live in mise. Erlang is headless: Java, wxWidgets, and ODBC are disabled.
+Both shells include `cat` → `bat` (or Ubuntu’s `batcat`) and `ch` → `chezmoi`,
+persistent history, and fzf integration. Bash also loads system completion.
+Android SDK paths activate only when an SDK exists; an existing `ANDROID_HOME`
+takes priority. This setup does not download the Android SDK.
+
+Safe Chain installs through mise. Chezmoi downloads its matching versioned shell
+integration, so no `safe-chain setup` installer needs to modify the shell files.
+Interactive package-manager commands use Safe Chain when available. Noninteractive
+CI scripts do not automatically load these wrappers. Safe Chain is not a sandbox.
+
+Tools live in mise.
 Neovim uses the upstream LazyVim starter. Playwright browser binaries are not
 installed automatically; install only the browser needed by a project.
 
-Run `python3 -m unittest discover -s tests -v` for isolated setup and shell tests.
 Run an installation test only in a disposable Ubuntu environment, not your home.
 
 ## Before making this repository public

@@ -6,7 +6,7 @@ cd -- "$(dirname -- "${BASH_SOURCE[0]}")"
 
 umask 077
 backup_dir=""
-for target in .bashrc .zshrc .config/mise .config/nvim .oh-my-zsh; do
+for target in .bashrc .zshrc .config/mise .config/nvim .oh-my-zsh .safe-chain/scripts; do
   if [[ ! -e "$HOME/$target" && ! -L "$HOME/$target" ]]; then
     continue
   fi

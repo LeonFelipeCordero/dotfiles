@@ -10,11 +10,11 @@ if [[ -f /etc/debian_version ]]; then
 
   "${sudo_cmd[@]}" apt-get update
   "${sudo_cmd[@]}" env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-    ca-certificates curl git zsh build-essential autoconf m4 pkg-config \
+    ca-certificates curl git zsh bash-completion build-essential autoconf m4 pkg-config \
     libncurses-dev libssl-dev unzip xz-utils
 elif [[ -f /etc/arch-release ]]; then
   sudo -n pacman -S --needed --noconfirm \
-    ca-certificates curl git zsh base-devel ncurses openssl unzip xz
+    ca-certificates curl git zsh bash-completion base-devel ncurses openssl unzip xz
 elif [[ "$(uname)" == Darwin ]]; then
   command -v brew >/dev/null 2>&1 || {
     echo "manual_deps: Install Homebrew before running setup" >&2
