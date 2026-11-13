@@ -13,21 +13,14 @@ go = "1.27.4"
 node = "26.13.1"
 pi = "1.5.2"
 "npm:@playwright/cli" = "0.1.24"
-codex = "0.163.0"
-opencode = "2.2.7"
 "github:rtk-ai/rtk" = "1.2.0"
 uv = "0.13.7"
 "npm:playwright" = "1.65.0"
 ripgrep = "15.2.0"
 fd = "10.5.2"
 
-[env]
-KERL_CONFIGURE_OPTIONS = "--without-javac --without-wx --without-odbc"
-
 [settings]
 experimental = true
-lockfile = true
-pin = true
 
 [settings.upgrade]
 auto_prune = false
